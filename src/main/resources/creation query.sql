@@ -1,0 +1,2 @@
+create table employee(id int identity, first_name varchar(50),last_name varchar(50),company_name varchar(50),address varchar(50),city varchar(50),county varchar(50),state varchar(50),zip varchar(50),phone1 varchar(50),phone2 varchar(50),email varchar(50),web varchar(50)
+ )
