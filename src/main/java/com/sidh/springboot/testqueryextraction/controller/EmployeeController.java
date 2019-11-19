@@ -122,7 +122,36 @@ public class EmployeeController {
     }
 
     @GetMapping("findbyname/{name}")
-    public List<Employee> findbyname(@PathVariable String name) {
-        return repo.findFirstnameByFirstnameIgnoreCase(name);
+    public List<String> findbyname(@PathVariable String name) {
+        return repo.findByFirstnameContainsIgnoreCaseOrderByFirstname(name).stream().map(Employee::getFirstname).collect(Collectors.toList());
     }
+
+    @GetMapping(value = "/bylastname/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Employee> findStringString(@PathVariable String name) {
+        return repo.findByFirstnameContainsIgnoreCaseOrderByFirstname(name);
+    }
+
+
+    @GetMapping("/sorting")
+    public List<List<String>> sortedfirstnames() {
+        Sort sort = Sort.by("zip").ascending().and(Sort.by("firstname").descending());
+        return repo.findAll(sort).stream().map(e ->
+            new ArrayList<String>() {{
+                add(e.getFirstname());
+                add(String.valueOf(e.getZip()));
+            }}).collect(Collectors.toList());
+    }
+
+    @GetMapping("/otherconditions/{conditionString}")
+    public List<String> otherconditions(@PathVariable String conditionString) {
+        return repo.findByFirstnameNotContains(conditionString).stream().map(Employee::getFirstname).collect(Collectors.toList());
+    }
+
+    @GetMapping("/inequality/{from}/{to}")
+    public List<Integer> getzipbycondition(@PathVariable int from, @PathVariable int to) {
+        return repo.findByZipBetween(from, to).stream().map(Employee::getZip)
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
 }

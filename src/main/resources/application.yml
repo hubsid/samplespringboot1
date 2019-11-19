@@ -5,7 +5,7 @@ spring:
     password: 123
     driver-class-name: org.h2.Driver
   jpa:
-    show-sql: false
+    show-sql: true
     hibernate:
       ddl-auto: update
 custom:

@@ -11,8 +11,10 @@ public class Employee {
     private int id;
     @Column(name = "first_name")
     private String firstname;
-    private String last_name;
-    private String company_name;
+    @Column(name = "last_name")
+    private String lastname;
+    @Column(name = "company_name")
+    private String companyName;
     private String address;
     private String city;
     private String county;
@@ -31,20 +33,20 @@ public class Employee {
         this.firstname = firstname;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getCompany() {
-        return company_name;
+        return companyName;
     }
 
     public void setCompany(String company) {
-        this.company_name = company;
+        this.companyName = company;
     }
 
     public String getAddress() {
